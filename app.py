@@ -92,9 +92,9 @@ def generate_wrapped():
         max_rank = user_data.get("maxRank", "N/A")
 
         # Total and yearly problems solved
-        total_solved = {f"{sub['problem']['contestId']}-{sub['problem']['index']}" for sub in submissions if sub["verdict"] == "OK"}
+        total_solved = {f"{sub['problem']['contestId']}-{sub['problem']['index']}" for sub in submissions if sub["verdict"] == "OK" and sub['problem'].get('contestId')}
         year_start = datetime(datetime.now().year, 1, 1).timestamp()
-        yearly_solved = {f"{sub['problem']['contestId']}-{sub['problem']['index']}" for sub in submissions if sub["verdict"] == "OK" and sub["creationTimeSeconds"] >= year_start}
+        yearly_solved = {f"{sub['problem']['contestId']}-{sub['problem']['index']}" for sub in submissions if sub["verdict"] == "OK" and sub["creationTimeSeconds"] >= year_start and sub['problem'].get('contestId')}
 
         # Longest streak calculation
         solved_days = sorted({datetime.utcfromtimestamp(sub["creationTimeSeconds"]).date() for sub in submissions if sub["verdict"] == "OK"})
