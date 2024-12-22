@@ -50,6 +50,9 @@ def handle_exception(e):
     # Handle non-HTTP exceptions
     return jsonify({"error": "An unexpected error occurred"}), 500
 
+@app.route("/" , methods = ["GET"])
+def hello():
+    return jsonify({"hello": "Username is required"}), 200
 @app.route("/generate_wrapped", methods=["POST"])
 @limiter.limit("10 per minute")  # More conservative rate limiting
 def generate_wrapped():
