@@ -11,6 +11,7 @@ from werkzeug.exceptions import HTTPException
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
 import logging
+import re
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -62,7 +63,7 @@ def generate_wrapped():
         return jsonify({"error": "Username is required"}), 400
 
     # Validate username input
-    if not isinstance(username, str) or not username.isalnum():
+    if not isinstance(username, str) or not re.match(r'^[\w\W]+$', username):
         return jsonify({"error": "Invalid username format"}), 400
 
     try:
