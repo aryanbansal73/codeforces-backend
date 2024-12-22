@@ -162,5 +162,5 @@ def generate_wrapped():
         logger.error(f"Exception in generate_wrapped: {str(e)}")
         return jsonify({"error": str(e)}), 500
 
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8000)), debug=False)
+# if __name__ == "__main__":
+#     app.run(host="0.0.0.0", port=int(os.getenv("PORT", 8000)), debug=False)
