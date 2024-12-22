@@ -20,7 +20,7 @@ Talisman(app)  # Secure headers
 limiter = Limiter(
     get_remote_address,
     app=app,
-    default_limits=["5000 per day", "200 per hour"]
+    default_limits=["15000 per day", "600 per hour"]
 )
 
 # Use environment variables for sensitive information
@@ -54,7 +54,7 @@ def handle_exception(e):
 def hello():
     return jsonify({"hello": "Username is required"}), 200
 @app.route("/generate_wrapped", methods=["POST"])
-# @limiter.limit("10 per minute")  # More conservative rate limiting
+@limiter.limit("20 per minute")  # More conservative rate limiting
 def generate_wrapped():
     data = request.json
     username = data.get("username")
