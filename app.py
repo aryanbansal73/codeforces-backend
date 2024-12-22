@@ -54,7 +54,7 @@ def handle_exception(e):
 def hello():
     return jsonify({"hello": "Username is required"}), 200
 @app.route("/generate_wrapped", methods=["POST"])
-@limiter.limit("10 per minute")  # More conservative rate limiting
+# @limiter.limit("10 per minute")  # More conservative rate limiting
 def generate_wrapped():
     data = request.json
     username = data.get("username")
